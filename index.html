@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: A Guide to Penny Stocks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: The infographic follows a logical narrative designed for a novice investor. It starts with a bold, simple definition (The <$5 Rule) to establish the core concept. It then immediately clarifies a common misconception with a "Price vs. Value" comparison. The narrative flows into the "Where They Trade" section to explain the market landscape, followed by a breakdown of the "High-Risk Profile" to detail the dangers. A visual guide to the "Pump & Dump" scheme makes a complex fraud understandable. Finally, it concludes with an actionable "Investor Safety Checklist." This top-down, concept-to-action structure tells a coherent story. -->
+    <!-- Visualization & Content Choices: 
+        1. The <$5 Rule (Inform): A single big number visualization to make the core definition memorable.
+        2. Price vs. Value (Compare): Side-by-side cards (HTML/CSS) to directly contrast two scenarios, clarifying that share price doesn't equal company size.
+        3. OTC Market Tiers (Organize): A flowchart-style diagram using HTML/CSS to visually represent the hierarchy and risk levels of OTC markets. This is more intuitive than a list.
+        4. Risk Profile (Compare): A horizontal bar chart (Chart.js) to compare Penny Stocks to Large-Cap stocks across key risk factors like volatility and liquidity.
+        5. Pump & Dump Scheme (Change/Process): A step-by-step process diagram (HTML/CSS) with icons (Unicode) and a simple line chart (Chart.js) to illustrate the price manipulation over time.
+        6. Investor Checklist (Inform/Organize): A styled list using HTML/CSS with Unicode icons for quick, scannable safety tips.
+        All visualizations avoid SVG/Mermaid, using Chart.js for charts and styled HTML for diagrams to ensure full compliance. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F0F4F8; /* Light Blue-Gray Background */
+        }
+        .infographic-card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #00529B; /* Accent Blue */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-black text-[#003B6D]">A VISUAL GUIDE TO PENNY STOCKS</h1>
+            <p class="text-lg text-gray-600 mt-2">Understanding the definition, risks, and landscape of stocks trading under $5 in the USA.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <section class="lg:col-span-3 infographic-card p-6 text-center">
+                 <h2 class="text-2xl font-bold text-[#00529B] mb-2">The Core Definition: The < $5 Rule</h2>
+                 <p class="text-gray-600 mb-4">In the United States, the U.S. Securities and Exchange Commission (SEC) defines a penny stock with a simple but critical benchmark:</p>
+                <div class="bg-blue-100 rounded-lg p-8">
+                    <p class="text-6xl md:text-8xl font-black text-[#003B6D] tracking-tighter">&lt; $5.00</p>
+                    <p class="text-xl font-bold text-[#00529B] mt-2">PER SHARE</p>
+                </div>
+                 <p class="text-sm text-gray-500 mt-4">This price tag is a regulatory tripwire that triggers specific investor protection rules due to the high risks involved.</p>
+            </section>
+            
+            <section class="lg:col-span-3 infographic-card p-6">
+                <h2 class="text-2xl font-bold text-center text-[#00529B] mb-4">Price vs. Value: A Common Misconception</h2>
+                <p class="text-center text-gray-600 mb-6">A low share price does not automatically mean a small company. **Market Capitalization** (Price × Shares) reveals the company's true size.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h3 class="font-bold text-lg text-center">Scenario A: "Penny Stock" by Price</h3>
+                        <p class="text-center text-sm mb-4">A Large Company</p>
+                        <p class="text-2xl font-bold text-center text-green-600">$4.00 <span class="text-sm font-normal text-gray-500">/ share</span></p>
+                        <p class="text-center text-gray-500">x 1 Billion Shares</p>
+                        <hr class="my-3">
+                        <p class="text-center text-sm">Market Cap:</p>
+                        <p class="text-3xl font-bold text-center text-[#00529B]">$4 Billion</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border">
+                        <h3 class="font-bold text-lg text-center">Scenario B: Not a Penny Stock</h3>
+                        <p class="text-center text-sm mb-4">A Smaller Company</p>
+                        <p class="text-2xl font-bold text-center text-green-600">$10.00 <span class="text-sm font-normal text-gray-500">/ share</span></p>
+                        <p class="text-center text-gray-500">x 20 Million Shares</p>
+                        <hr class="my-3">
+                        <p class="text-center text-sm">Market Cap:</p>
+                        <p class="text-3xl font-bold text-center text-[#00529B]">$200 Million</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 lg:col-span-3 infographic-card p-6">
+                <h2 class="text-2xl font-bold text-center text-[#00529B] mb-4">Where They Trade: The Market Landscape</h2>
+                <p class="text-center text-gray-600 mb-6">Most penny stocks are not on major exchanges like the NYSE or Nasdaq. They primarily trade on Over-the-Counter (OTC) markets, which have varying levels of transparency.</p>
+                <div class="flex flex-col md:flex-row justify-around items-center text-center gap-6">
+                    <div class="w-full md:w-1/3 p-4 bg-green-50 border-2 border-green-500 rounded-lg">
+                        <p class="text-3xl">✅</p>
+                        <h3 class="font-bold text-green-700 mt-2">OTCQX</h3>
+                        <p class="text-sm text-green-600">Highest transparency and financial standards in the OTC world.</p>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-400">&rarr;</div>
+                    <div class="w-full md:w-1/3 p-4 bg-yellow-50 border-2 border-yellow-500 rounded-lg">
+                        <p class="text-3xl">⚠️</p>
+                        <h3 class="font-bold text-yellow-700 mt-2">OTCQB</h3>
+                        <p class="text-sm text-yellow-600">For venture/early-stage companies with moderate reporting.</p>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-400">&rarr;</div>
+                    <div class="w-full md:w-1/3 p-4 bg-red-50 border-2 border-red-500 rounded-lg">
+                        <p class="text-3xl">❌</p>
+                        <h3 class="font-bold text-red-700 mt-2">OTC Pink</h3>
+                        <p class="text-sm text-red-600">Highest risk, with little to no public information required.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="md:col-span-1 lg:col-span-1 infographic-card p-6">
+                <h2 class="text-2xl font-bold text-[#00529B] mb-4">High-Risk Profile</h2>
+                <p class="text-gray-600 mb-4">Penny stocks are defined by characteristics that make them exceptionally risky compared to established, large-cap stocks.</p>
+                <div class="chart-container h-80 sm:h-96">
+                    <canvas id="riskProfileChart"></canvas>
+                </div>
+            </section>
+
+            <section class="md:col-span-1 lg:col-span-2 infographic-card p-6">
+                <h2 class="text-2xl font-bold text-[#00529B] mb-2">Fraud Alert: The "Pump & Dump" Scheme</h2>
+                <p class="text-gray-600 mb-4">This common fraud exploits low liquidity and lack of information to manipulate prices and deceive investors.</p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-gray-100 p-3 rounded-lg"><strong>1. Accumulation:</strong> Fraudsters quietly buy large amounts of a stock at a very low price.</div>
+                    <div class="bg-gray-100 p-3 rounded-lg"><strong>2. The Pump:</strong> They spread false hype via social media and email to drive up the price.</div>
+                    <div class="bg-gray-100 p-3 rounded-lg"><strong>3. The Dump:</strong> As new investors buy in, the fraudsters sell all their shares at the inflated peak price.</div>
+                    <div class="bg-gray-100 p-3 rounded-lg"><strong>4. The Crash:</strong> The price plummets, leaving everyone else with worthless stock.</div>
+                </div>
+                <div class="mt-4 chart-container h-48">
+                    <canvas id="pumpDumpChart"></canvas>
+                </div>
+            </section>
+
+            <section class="lg:col-span-3 infographic-card p-6">
+                <h2 class="text-2xl font-bold text-center text-[#00529B] mb-6">Investor Safety Checklist</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-4xl">🔎</p>
+                        <h3 class="font-bold mt-2">Research Deeply</h3>
+                        <p class="text-sm text-gray-600">Verify company info independently. Use the SEC's EDGAR database.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-4xl">🚫</p>
+                        <h3 class="font-bold mt-2">Reject Pressure</h3>
+                        <p class="text-sm text-gray-600">Ignore "guaranteed return" promises and high-pressure sales tactics.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-4xl">💧</p>
+                        <h3 class="font-bold mt-2">Check Liquidity</h3>
+                        <p class="text-sm text-gray-600">Avoid thinly traded stocks. If volume is low, you may not be able to sell.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-4xl">💸</p>
+                        <h3 class="font-bold mt-2">Invest Only What You Can Lose</h3>
+                        <p class="text-sm text-gray-600">Assume you could lose your entire investment. This is speculation, not saving.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const wrapLabel = (label) => {
+        if (label.length > 16) {
+            const words = label.split(' ');
+            let currentLine = '';
+            const lines = [];
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        return label;
+    };
+
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+            return label.join(' ');
+        }
+        return label;
+    };
+
+    const riskProfileCtx = document.getElementById('riskProfileChart').getContext('2d');
+    new Chart(riskProfileCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Volatility', 'Liquidity', 'Transparency', 'Fraud Potential'],
+            datasets: [{
+                label: 'Penny Stocks',
+                data: [95, 20, 25, 85],
+                backgroundColor: '#FF6B6B',
+                borderColor: '#FF6B6B',
+                borderWidth: 1
+            }, {
+                label: 'Large-Cap Stocks',
+                data: [30, 90, 95, 10],
+                backgroundColor: '#007BFF',
+                borderColor: '#007BFF',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: value => value + '%'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        }
+    });
+
+    const pumpDumpCtx = document.getElementById('pumpDumpChart').getContext('2d');
+    new Chart(pumpDumpCtx, {
+        type: 'line',
+        data: {
+            labels: ['Accumulation', 'Pump', 'Dump', 'Crash'],
+            datasets: [{
+                label: 'Stock Price',
+                data: [0.10, 0.25, 4.50, 0.05],
+                fill: true,
+                borderColor: '#FF6B6B',
+                backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                tension: 0.4,
+                pointBackgroundColor: '#FF6B6B',
+                pointRadius: 5,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: value => '$' + value.toFixed(2)
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
